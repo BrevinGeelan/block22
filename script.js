@@ -51,11 +51,11 @@ const deleteParty = async (id) => {
 
 // render a single party by id
 const renderSinglePartyById = async (id) => {
-
+console.log(`Render single party: ${id}`);
   try {
     // fetch party details from server
     const party = await getPartyById(id);
-
+    console.log('Party details: ', party);
     if (!id || id.length === 0) {
       partyContainer.innerHTML = "<h3> no parties found</h3>";
       return;
@@ -78,11 +78,11 @@ const renderSinglePartyById = async (id) => {
     const partyDetailsElement = document.createElement('div');
     partyDetailsElement.classList.add('party-details');
     partyDetailsElement.innerHTML = `
-            <h2>${party.title}</h2>
-            <p>${party.event}</p>
-            <p>${party.city}</p>
-            <p>${party.state}</p>
-            <p>${party.country}</p>
+            <h2>${party.name}</h2>
+            <p>${party.date}</p>
+            <p>${party.time}</p>
+            <p>${party.location}</p>
+            <p>${party.description}</p>
             <h3>Guests:</h3>
             <ul>
             ${guests
@@ -119,10 +119,10 @@ const renderParties = async (parties) => {
       partyElement.classList.add('party');
       partyElement.innerHTML = `
                 <h2>${party.name}</h2>
-                <p>${party.description}</p>
                 <p>${party.date}</p>
                 <p>${party.time}</p>
                 <p>${party.location}</p>
+                <p>${party.description}</p>
                 <button class="details-button" data-id="${party.id}">See Details</button>
                 <button class="delete-button" data-id="${party.id}">Delete</button>
             `;
@@ -131,8 +131,8 @@ const renderParties = async (parties) => {
       // see details
       const detailsButton = partyElement.querySelector('.details-button');
       detailsButton.addEventListener('click', async (event) => {
-        let partyID = event.target.dataset.id;
-        await renderSinglePartyById(partyID)
+        let partyID = event.currentTarget.dataset.id;
+       await renderSinglePartyById(partyID);
       });
 
       // delete party
@@ -168,3 +168,7 @@ init();
 //               .join('')}
 //               </ul>
 //troubling
+//if (!id || id.length === 0) {
+ // partyContainer.innerHTML = "<h3> no parties found</h3>";
+ // return;
+// }
