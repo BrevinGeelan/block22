@@ -3,3 +3,17 @@
     margin: 0;
     box-sizing: border-box;
 }
+body { background-color: aliceblue;
+text-align: center;}
+p {
+    font-size: 12px;
+    font-family: 'Courier New', Courier, monospace;
+}
+h2 {
+    font-size: 16px;
+    font-family: 'Courier New', Courier, monospace;
+}
+h1 {
+    border-radius:6px;
+    background-color: rgba(255, 0, 0, 0.493);
+}
